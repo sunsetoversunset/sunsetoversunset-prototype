@@ -7,6 +7,8 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 
+@import url('https://rsms.me/inter/inter.css');
+
  
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -98,19 +100,124 @@ textarea {
    ========================================================================== */
 
 
+html, button, input, select, textarea {
+
+ font-family: 'Inter', sans-serif; 
+
+}
 
 
+body { padding: 0; margin: 0; }
 
 
+#top-bar {
+  width: 100%;
+  font-family: rockwell, serif;
+  font-style: normal;
+
+}
 
 
+#title {
+  font-weight: 700;
+  font-size: 2.0em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 20px;
+  float: left;
+}
 
 
+#top-bar-links {
+  font-weight: 700;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: right;
+  padding: 20px;
+  float: right;
+}
+
+#top-bar-links a {
+  color: #441125;
+  text-decoration: none;
+}
+
+#top-bar-links a:hover {
+  color: #c5156d;
+}
 
 
+#controls-widget {
+  margin: 2px 20px;
+  border: 1.5px solid #dddfdf;
+  border-radius: 12px;
+  padding: 15px;
+  color: #2a2c2c;
+}
 
+#controls-title {
+  font-weight: 700;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  float: left;
+  margin-right: 25px;
+}
 
+.control-group {
+  float: left;
+  margin-right: 25px;
+}
 
+#scroll-control {
+
+}
+
+.control-option {
+  float: left;
+  margin-right: 15px;
+  color: #b8baba;
+}
+
+.control-option-selected {
+  color: #394949;
+}
+
+.control-option:hover {
+  color: #536a6a;
+  cursor: pointer;
+}
+
+.control-option-header {
+  border-bottom: 2px solid #dddfdf;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.streetview-year-container {
+  width: 100%;
+  margin: 30px 0 0 0;
+}
+
+.photography-strip {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.streetview-year-label {
+  font-family: "rockwell",serif;
+  font-weight: 700;
+  font-size: 1.6em;
+  margin-left: 20px;
+}
+
+.single-photo-holder {
+  float: left;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+}
 
  /* ==========================================================================
    Helper classes
