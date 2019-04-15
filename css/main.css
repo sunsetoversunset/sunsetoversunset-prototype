@@ -219,7 +219,7 @@ body { padding: 0; margin: 0; }
   padding: 0;
 }
 
-#map-holder-1995 {
+#map-holder-1995, #map-holder-1985 {
 
   height: 250px;
   width: 100%;
