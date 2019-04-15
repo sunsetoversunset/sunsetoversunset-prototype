@@ -12,7 +12,8 @@ $.getJSON('./data/79_8u9_snippet.geojson', function(g) {
 		pointToLayer: function(p,coords) {
 			console.log(p);
 			icon = L.icon({
-				iconUrl: p["properties"]["filename"] + "/full/,250/0/default.jpg"
+				iconUrl: p["properties"]["filename"] + "/full/,225/0/default.jpg",
+				className: 'jumper-image'
 			})
 			return L.marker(coords, {icon: icon});
 		}
