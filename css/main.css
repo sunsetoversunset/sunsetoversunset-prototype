@@ -194,6 +194,10 @@ body { padding: 0; margin: 0; }
   padding-bottom: 5px;
 }
 
+.streetview-containers {
+  width: 100%;
+}
+
 .streetview-year-container {
   width: 100%;
   margin: 30px 0 0 0;
@@ -219,20 +223,16 @@ body { padding: 0; margin: 0; }
   padding: 0;
 }
 
-#map-holder-1995, #map-holder-1985 {
+.streetview-strip-holder {
 
-  height: 250px;
+  height: 300px;
   width: 100%;
 
 }
 
-.jumper-image {
-  /*opacity: 0.8;*/
-}
+rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
 
-.jumper-image:hover {
-  z-index: 100 !important;
-}
+
 
  /* ==========================================================================
    Helper classes

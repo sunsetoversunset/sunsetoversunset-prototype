@@ -1,0 +1,89 @@
+<html>
+	<head>
+		
+		<style>
+			#holder { width: 100%; height: 300px; border: 1px solid black; }
+			.main-svg { border: none; }
+			.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
+			.single-image:hover { z-index: 99999 !important; }
+		</style>
+	</head>
+	<body>
+
+		<div id="holder">
+		</div>
+		
+
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+
+		<script>
+			
+			var width = d3.select("#holder").node().getBoundingClientRect().width;
+
+			var svg = d3.select("#holder")
+				.append("svg")
+				.attr("width", width)
+				.attr("height", 260)
+				.attr("class", "main-svg")
+				.call(d3.zoom().on("zoom",zoomed).on("end",zoomdraw));
+
+			var g = svg.append("g");
+
+			const mult = 150000;
+
+			d3.csv('../data/test-csv.csv').then(loadItems)
+
+			function loadItems(d) {
+				g.selectAll("rect")
+					.data(d)
+					.enter()
+					.append("rect")
+					.attr("x", function(d) { return mult * parseFloat(d.index) })
+					.attr("y", "0")
+					.attr("width", "450")
+					.attr("height", "250")
+					.attr("class", "image-frame");
+
+				loadImages(0,width);
+			}
+				
+			function zoomed() {
+				g.attr("transform","translate(" + d3.event.transform.x + ",0)");
+			}
+
+			function zoomdraw() {
+
+				var t = d3.event.transform.x;
+				var left = 0 - t;
+				var right = width - t;
+				loadImages(left,right);
+			
+			}
+
+			function loadImages(left,right) {
+
+				g.selectAll("rect")
+					.each( function(d) { 
+
+						var x = d3.select(this).attr("x")
+						if(x > left && x < right) { 
+
+							if(d.ld != true) {
+								var f = d["filename"] + "/full/,250/0/default.jpg";
+								g.append("svg:image")
+									.attr("x", x)
+									.attr("y", "0")
+									.attr("width", "450")
+									.attr("height", "250")
+									.attr("xlink:href", f)
+									.attr("class","single-image");
+								d.ld = true;
+							}
+						 }; 
+					});
+			}
+
+		</script>
+
+	</body>
+</html>
