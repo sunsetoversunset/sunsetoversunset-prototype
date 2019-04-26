@@ -25,7 +25,7 @@ function buildStrip(r) {
     var g = svg.append("g")
         .attr('class','strip-g');
 
-    d3.csv('../data/' + r.src).then(function(d){ loadItems(d,g); });
+    d3.csv('./data/' + r.src).then(function(d){ loadItems(d,g); });
 
  }
 

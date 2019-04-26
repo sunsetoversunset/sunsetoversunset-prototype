@@ -31,7 +31,7 @@
 
 			const mult = 150000;
 
-			d3.csv('../data/test-csv.csv').then(loadItems)
+			d3.csv('./data/test-csv.csv').then(loadItems)
 
 			function loadItems(d) {
 				g.selectAll("rect")
