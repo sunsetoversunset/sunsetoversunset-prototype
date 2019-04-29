@@ -9,12 +9,12 @@
 
 @import url('https://rsms.me/inter/inter.css');
 
- 
+
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
 
-   html {
+html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
@@ -95,146 +95,203 @@ textarea {
 
 
 
- /* ==========================================================================
+/* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
 
-html, button, input, select, textarea {
+html,
+button,
+input,
+select,
+textarea {
 
- font-family: 'Inter', sans-serif; 
+    font-family: 'Inter', sans-serif;
 
 }
 
 
-body { padding: 0; margin: 0; }
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#fixed-top {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  height: 180px;
+  z-index: 50;
+}
+
+#shim { height: 200px; width: 100%; }
 
 
 #top-bar {
-  width: 100%;
-  font-family: rockwell, serif;
-  font-style: normal;
-
+    width: 100%;
+    font-family: rockwell, serif;
+    font-style: normal;
 }
 
 
 #title {
-  font-weight: 700;
-  font-size: 2.0em;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 20px;
-  float: left;
+    font-weight: 700;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 20px;
+    float: left;
 }
 
 
 #top-bar-links {
-  font-weight: 700;
-  font-size: 1.8em;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  text-align: right;
-  padding: 20px;
-  float: right;
+    font-weight: 700;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-align: right;
+    padding: 20px;
+    float: right;
 }
 
 #top-bar-links a {
-  color: #441125;
-  text-decoration: none;
+    color: #441125;
+    text-decoration: none;
 }
 
 #top-bar-links a:hover {
-  color: #c5156d;
+    color: #c5156d;
 }
 
+#controls-holder {
+    width: 100%;
+}
+
+.scroll-button, #controls-widget {
+    border: 1.5px solid #dddfdf;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.scroll-button {
+    width: auto;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 10px;
+    font-weight: 700;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.scroll-button:hover {
+  background-color: #dddfdf;
+}
+
+#scroll-button-left {
+      float: left;
+}
+
+#scroll-button-right {
+  float: right;
+}
 
 #controls-widget {
-  margin: 2px 20px;
-  border: 1.5px solid #dddfdf;
-  border-radius: 12px;
-  padding: 15px;
-  color: #2a2c2c;
+    border: 1.5px solid #dddfdf;
+    border-radius: 12px;
+    color: #2a2c2c;
+    float: left;
+    width: 50%;
 }
 
 #controls-title {
-  font-weight: 700;
-  font-size: 1.3em;
-  margin-bottom: 15px;
-  float: left;
-  margin-right: 25px;
+    font-weight: 700;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    float: left;
+    margin-right: 25px;
 }
 
 .control-group {
-  float: left;
-  margin-right: 25px;
+    float: left;
+    margin-right: 25px;
 }
 
-#scroll-control {
-
-}
 
 .control-option {
-  float: left;
-  margin-right: 15px;
-  color: #b8baba;
+    float: left;
+    margin-right: 15px;
+    color: #b8baba;
 }
 
 .control-option-selected {
-  color: #394949;
+    color: #394949;
 }
 
 .control-option:hover {
-  color: #536a6a;
-  cursor: pointer;
+    color: #536a6a;
+    cursor: pointer;
 }
 
 .control-option-header {
-  border-bottom: 2px solid #dddfdf;
-  margin-bottom: 5px;
-  padding-bottom: 5px;
+    border-bottom: 2px solid #dddfdf;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .streetview-containers {
-  width: 100%;
+    width: 100%;
 }
 
 .streetview-year-container {
-  width: 100%;
-  margin: 30px 0 0 0;
+    width: 100%;
+    height: 250px;
+    margin: 15px 0 0 0;
 }
 
-.photography-strip {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
+.photography-strip-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
 }
 
 .streetview-year-label {
-  font-family: "rockwell",serif;
-  font-weight: 700;
-  font-size: 1.6em;
-  margin-left: 20px;
+    font-family: "rockwell", serif;
+    position: relative;
+    display: inline-block;
+    bottom: -30px;
+    font-weight: 700;
+    font-size: 1.4em;
+    margin-left: 20px;
+    padding: 0 5px;
+    background-color: black;
+    color: white;
+    z-index: 5;
+
 }
 
 .single-photo-holder {
-  float: left;
-  height: 250px;
-  margin: 0;
-  padding: 0;
+    float: left;
+    height: 250px;
+    margin: 0;
+    padding: 0;
 }
 
 .streetview-strip-holder {
 
-  height: 300px;
-  width: 100%;
+    height: 300px;
+    width: 100%;
 
 }
 
-rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
+rect.image-frame {
+    stroke-width: 1;
+    stroke: rgb(200, 200, 200);
+    fill: none;
+}
 
 
 
- /* ==========================================================================
+/* ==========================================================================
    Helper classes
    ========================================================================== */
 
@@ -242,8 +299,8 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
  * Hide visually and from screen readers
  */
 
- .hidden {
-  display: none !important;
+.hidden {
+    display: none !important;
 }
 
 /*
@@ -256,15 +313,16 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
 */
 
 .visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  white-space: nowrap; /* 1 */
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+    /* 1 */
 }
 
 /*
@@ -275,13 +333,13 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
 
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
-  white-space: inherit;
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    white-space: inherit;
 }
 
 /*
@@ -289,7 +347,7 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
 */
 
 .invisible {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 /*
@@ -306,45 +364,49 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
 
 .clearfix:before,
 .clearfix:after {
-  content: " "; /* 1 */
-  display: table; /* 2 */
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
 
 .clearfix:after {
-  clear: both;
+    clear: both;
 }
 
- 
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
 
-   @media only screen and (min-width: 35em) {
+@media only screen and (min-width: 35em) {
     /* Style adjustments for viewports that meet the condition */
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
 }
 
- 
+
 /* ==========================================================================
    Print styles.
    Inlined to avoid the additional HTTP request:
    https://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 
-   @media print {
+@media print {
+
     *,
     *:before,
     *:after {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster */
+        color: #000 !important;
+        /* Black prints faster */
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
         text-shadow: none !important;
@@ -356,11 +418,11 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
     }
 
     a[href]:after {
-        content: " (" attr(href) ")";
+        content: " ("attr(href) ")";
     }
 
     abbr[title]:after {
-        content: " (" attr(title) ")";
+        content: " ("attr(title) ")";
     }
 
     /*
@@ -376,6 +438,7 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
     pre {
         white-space: pre-wrap !important;
     }
+
     pre,
     blockquote {
         border: 1px solid #999;
@@ -408,5 +471,3 @@ rect.image-frame { stroke-width:1; stroke: rgb(200,200,200); fill: none; }
         page-break-after: avoid;
     }
 }
-
-

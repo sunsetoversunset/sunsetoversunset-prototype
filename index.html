@@ -24,13 +24,16 @@
   
   <div id="wraps-all">
     
+    <div id="fixed-top" class="clearfix">
     <div class="clearfix" id="top-bar">
       <div id="title">Sunset Over Sunset</div>
       <div id="top-bar-links"><a href="">Guide</a> / <a href="">Help</a> / <a href="">About</a></div>
     </div>
 
-    <div id="controls-holder">
-      <div class="pure-u-1">
+    <div id="controls-holder" class="clearfix">
+      <div id="scroll-button-left" class="scroll-button clearfix"><span class="left-direction">West</span><br><i class="fas fa-arrow-circle-left"></i>
+      </div>
+
         <div id="controls-widget" class="clearfix">
           <div id="controls-title"><i class="fas fa-eye"></i> Controls</div>
 
@@ -39,54 +42,14 @@
             <div class="control-option control-option-selected"><i class="far fa-caret-square-up"></i> Looking north</div><div class="control-option"><i class="far fa-caret-square-down"></i> Looking south</div>
           </div>
         </div>
+
+         <div id="scroll-button-right" class="scroll-button clearfix"><span class="right-direction">East</span><br><i class="fas fa-arrow-circle-right"></i>
+      </div>
       </div>
     </div>
-
-  <div id="streetview-containers" class="clearfix">
-
-        <div class="streetview-year-container" id="streetview-1966">
-      <div class="streetview-year-label">1966</div>
-
-      <div id="streetview-strip-holder-1966" class="streetview-strip-holder"></div>
-
-
-    </div>
-
-
-    <div class="streetview-year-container" id="streetview-1973">
-      <div class="streetview-year-label">1973</div>
-
-      <div id="streetview-strip-holder-1973" class="streetview-strip-holder"></div>
-
-
-    </div>
-
-
-   <div class="streetview-year-container" id="streetview-1985">
-      <div class="streetview-year-label">1985</div>
-
-      <div id="streetview-strip-holder-1985" class="streetview-strip-holder"></div>
-
-
-    </div>
-
-    <div class="streetview-year-container" id="streetview-1995">
-      <div class="streetview-year-label">1995</div>
-
-      <div id="streetview-strip-holder-1995" class="streetview-strip-holder"></div>
-
-
-    </div>
-
-        <div class="streetview-year-container" id="streetview-2007">
-      <div class="streetview-year-label">2007</div>
-
-      <div id="streetview-strip-holder-2007" class="streetview-strip-holder"></div>
-
-
-    </div>
-
-  </div>
+  
+  <div id="shim"></div>
+  <div id="streetview-containers" class="clearfix"><!-- d3 does its work here --></div>
 
   </div><!-- #wraps-all -->
 
