@@ -2,6 +2,8 @@
 var width = d3.select("#streetview-containers").node().getBoundingClientRect().width;
 const mult = 148000; 
 var scroll = 0;
+var moveSpeed = 0.8;
+var perspective = 'n';
 
 const reels = [
     {'year': '1966', 'src': '2012m1_ref199_241'},
@@ -22,84 +24,215 @@ streetviewContainers.append('div')
     .attr('class','streetview-year-label')
     .text(function(d){ return d.year; });
 
-var stripsContainers = streetviewContainers.append('div')
-    .attr('class','photography-strip-container')
-    .attr('id', function(d){ return 'photography-strip-container' + d.year; });
+var stripsContainersN = streetviewContainers.append('div')
+    .attr('class','photography-strip-container photography-strip-container-n')
+    .attr('id', function(d){ return 'photography-strip-container-n-' + d.year; });
 
-var strips = stripsContainers.append('svg')
+var stripsContainersS = streetviewContainers.append('div')
+    .attr('class','photography-strip-container photography-strip-container-s hidden-strip')
+    .attr('id', function(d){ return 'photography-strip-container-s-' + d.year; });
+
+var stripsN = stripsContainersN.append('svg')
     .attr("width", width)
     .attr("height", 250)
-    .attr("class", "strip-svg")
-    .attr("id", function(d) { return "strip-svg-" + d.year; });
+    .attr("class", "strip-svg strip-svg-n")
+    .attr("id", function(d) { return "strip-svg-n-" + d.year; });
 
-strips.each(buildStrip);
+var stripsS = stripsContainersS.append('svg')
+    .attr("width", width)
+    .attr("height", 250)
+    .attr("class", "strip-svg strip-svg-s")
+    .attr("id", function(d) { return "strip-svg-s-" + d.year; });
 
-var rightButton = d3.select("#scroll-button-right")
-    .on('click',function(){ scrollHandle(width*.8,"right"); });
 
-var rightButton = d3.select("#scroll-button-left")
-    .on('click',function(){ scrollHandle(width*.8,"left"); });
+buildStrips().then(loadImages);
+
+rightButton = d3.select("#scroll-button-right")
+    .on('click',function(){ scrollHandle("r"); });
+
+leftButton = d3.select("#scroll-button-left")
+    .on('click',function(){ scrollHandle("l"); });
+
+d3.selectAll("#perspective-control>.control-option")
+    .on('click',function() { 
+        var t = d3.select(this);
+        var p = t.attr('data-value');
+        if (perspective != p) {
+            perspective = p;
+            d3.selectAll('.photography-strip-container').classed('hidden-strip',true);
+            d3.selectAll('.photography-strip-container-' + p).classed('hidden-strip',false);
+
+            loadImages();
+
+            d3.selectAll('.direction-text').text(function(){ return d3.select(this).text() == 'West' ? "East" : "West" });
+            d3.selectAll('#perspective-control>.control-option').classed('control-option-selected',false);
+            t.classed('control-option-selected',true);
+        }
+
+     });
+
+d3.selectAll("#speed-control>.control-option")
+    .on('click', function(){
+        var t = d3.select(this);
+        moveSpeed = t.attr('data-value');
+        d3.selectAll("#speed-control>.control-option").classed('control-option-selected',false);
+        t.classed('control-option-selected',true);
+    });
+
+d3.select("#years-control").selectAll("div.control-option")
+    .data(reels)
+    .enter()
+    .append("div")
+    .attr("class","control-option control-option-selected")
+    .html(function(d){ return '<i class="fas fa-toggle-on"></i> ' + d.year; })
+    .on('click',function(d) {
+        thisButton = d3.select(this)
+        selectedStrip = d3.select('#streetview-year-container-' + d.year);
+        if(thisButton.classed('control-option-selected')){
+            selectedStrip.classed('hidden-year',true);
+            thisButton.classed('control-option-selected',false);
+            thisButton.select('i').classed('fa-toggle-off',true).classed('fa-toggle-on',false);
+
+        } 
+        else {
+            selectedStrip.classed('hidden-year',false);
+            thisButton.classed('control-option-selected',true);
+            thisButton.select('i').classed('fa-toggle-off',false).classed('fa-toggle-on',true);
+        }
+    });
+
+
+
+function buildStrips() {
+    
+    return new Promise(function(resolve,error){
+    var promises = [];
+    
+    stripsN.each(function(d){
+        var stripSvg = d3.select(this);
+        promises.push(d3.csv('./data/' + d.src + '-n.csv').then(function(csv){ createWireframes(csv,stripSvg,'n',1);} ));
+    });
+
+    stripsS.each(function(d){
+        var stripSvg = d3.select(this);
+        promises.push(d3.csv('./data/' + d.src + '-s.csv').then(function(csv){ createWireframes(csv,stripSvg,'s',-1);} ));
+    });
+
+    Promise.all(promises).then(function(){ resolve(); });
+
+    });
+}
+
+function createWireframes(csv,stripSvg,classer,flipper) {
+    
+    var g = stripSvg.append('g')
+        .attr("class",function(){ return "strip-g strip-g-" + classer;});
+
+    var rect = g.selectAll("rect")
+        .data(csv)
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return flipper * (mult * parseFloat(d.index)); })
+        .attr("y", "0")
+        .attr("width", "380")
+        .attr("height", "250")
+        .attr("class", function(){ return "image-frame image-frame-" + classer;});
+}
+
+
+function loadImages() {
+
+    if (perspective == 'n') 
+     { var  m = 1;
+        var left = scroll-200;
+        var right = scroll+width+200;  }
+    else {
+        var m = -1;
+        var right = scroll+200;
+        var left = scroll-width-200;
+    }
+
+    d3.selectAll('.image-frame-' + perspective)
+        .each(function(d) { 
+            var x = d3.select(this).attr("x") 
+            if(m*x >= left && m*x <= right) { 
+                if(d.ld != true) {
+                    var g = d3.select(this.parentNode);
+                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"] + "/full/,250/0/default.jpg";
+                    g.append("svg:image")
+                        .attr("x", x)
+                        .attr("y", "0")
+                        .attr("width", "380")
+                        .attr("height", "250")
+                        .attr("xlink:href", f)
+                        .attr("class","single-image");
+                    d.ld = true;
+                }
+             }; 
+        });
+}
+
+/**
+
+function createWireframes() {
+    return new Promise(function(resolve,error){
+        resolve();
+    });
+}
+
+
+
+
+
+stripsN.each(buildStrip);
+stripsS.each(buildStrip);
+
 
 function buildStrip(d) {
     var strip = d3.select(this);
-    d3.csv('./data/' + d.src + '-north.csv').then(function(d) { createWireframes(d,strip); });
+    var direction;
+    strip.classed("strip-svg-s") ? direction = 's' : direction = 'n';
+    d3.csv('./data/' + d.src + '-' + direction + '.csv' ).then(function(d) { createWireframes(d,strip,direction); });
 }
 
-function createWireframes(d,strip) {
+function createWireframes(d,strip,direction) {
+
+    var flipper, classer;
+    if(direction == 's') {
+        flipper = -1;
+        classer = 'strip-g strip-g-s';
+    }
+    else {
+        flipper = 1;
+        classer = 'strip-g strip-g-n'
+    }
+
     var g = strip.append('g')
-        .attr("class","strip-g");
+        .attr("class",classer);
 
     var rect = g.selectAll("rect")
         .data(d)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return mult * parseFloat(d.index) })
+        .attr("x", function(d) { return flipper * (mult * parseFloat(d.index)); })
         .attr("y", "0")
         .attr("width", "450")
         .attr("height", "250")
         .attr("class", "image-frame");
 
-    loadImages(g,0,width);
-}
-
-
-function loadItems(d,g) {
-    g.selectAll("rect")
-        .data(d)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) { return mult * parseFloat(d.index) })
-        .attr("y", "0")
-        .attr("width", "450")
-        .attr("height", "250")
-        .attr("class", "image-frame");
-
-    loadImages(g,-10,width);
+    return true;
 }
     
-// function zoomed() {
-//     d3.selectAll('.strip-g').attr("transform","translate(" + d3.event.transform.x + ",0)");
-// }
+function loadImages() {
 
-// function zoomdraw() {
-
-//     var t = d3.event.transform.x;
-//     var left = -50 - t;
-//     var right = width - t;
-
-//     d3.selectAll('.strip-g')
-//         .each(function(g) { loadImages(d3.select(this),left,right); } )    
-// }
-
-function loadImages(g,left,right) {
-
-    g.selectAll("rect")
+    var loadStrips = d3.selectAll(".strip-svg-" + perspective);
+    loadStrips.selectAll("rect")
         .each( function(d) { 
             var x = d3.select(this).attr("x")
             if(x >= left && x <= right) { 
 
                 if(d.ld != true) {
-                    var f = d["filename"] + "/full/,250/0/default.jpg";
+                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"] + "/full/,250/0/default.jpg";
                     g.append("svg:image")
                         .attr("x", x)
                         .attr("y", "0")
@@ -113,16 +246,23 @@ function loadImages(g,left,right) {
         });
 }
 
-function scrollHandle(dist,dir) {
+**/
 
-    dir=='left' ? dist = scroll + dist : dist = scroll - dist;
+function scrollHandle(direction) {
+
+    var dist;
+    ( direction == 'r' && perspective == 'n' ) || (direction == 'l' && perspective == 's') ? dist = scroll + (moveSpeed * width) : dist = scroll - (moveSpeed * width);
     scroll = dist;
 
-    d3.selectAll('.strip-g')
+    d3.selectAll('.strip-g-n')
         .transition()
-        .attr("transform","translate(" + dist + ",0)")
-        .each(function() { loadImages(d3.select(this),-scroll,width-scroll); });
+        .attr("transform","translate(" + -dist + ",0)");
 
+    d3.selectAll('.strip-g-s')
+        .transition()
+        .attr("transform","translate(" + dist + ",0)");
+
+    loadImages();
 
 }
 
