@@ -53,6 +53,12 @@ rightButton = d3.select("#scroll-button-right")
 leftButton = d3.select("#scroll-button-left")
     .on('click',function(){ scrollHandle("l"); });
 
+d3.select('body')
+    .on('keydown',function(){
+        if(d3.event.key == 'ArrowLeft') { scrollHandle("l"); }
+        if(d3.event.key == 'ArrowRight') { scrollHandle("r"); }
+    });
+
 d3.selectAll("#perspective-control>.control-option")
     .on('click',function() { 
         var t = d3.select(this);
