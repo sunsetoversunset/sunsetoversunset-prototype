@@ -164,95 +164,21 @@ function loadImages() {
             if(m*x >= left && m*x <= right) { 
                 if(d.ld != true) {
                     var g = d3.select(this.parentNode);
-                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"] + "/full/,250/0/default.jpg";
+                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"];
                     g.append("svg:image")
                         .attr("x", x)
                         .attr("y", "0")
                         .attr("width", "380")
                         .attr("height", "250")
-                        .attr("xlink:href", f)
-                        .attr("class","single-image");
+                        .attr("xlink:href", f  + "/full/,250/0/default.jpg")
+                        .attr("class","single-image")
+                        .on("click",function(d){ window.open(f + "/full/,900/0/default.jpg") });
                     d.ld = true;
                 }
              }; 
         });
 }
 
-/**
-
-function createWireframes() {
-    return new Promise(function(resolve,error){
-        resolve();
-    });
-}
-
-
-
-
-
-stripsN.each(buildStrip);
-stripsS.each(buildStrip);
-
-
-function buildStrip(d) {
-    var strip = d3.select(this);
-    var direction;
-    strip.classed("strip-svg-s") ? direction = 's' : direction = 'n';
-    d3.csv('./data/' + d.src + '-' + direction + '.csv' ).then(function(d) { createWireframes(d,strip,direction); });
-}
-
-function createWireframes(d,strip,direction) {
-
-    var flipper, classer;
-    if(direction == 's') {
-        flipper = -1;
-        classer = 'strip-g strip-g-s';
-    }
-    else {
-        flipper = 1;
-        classer = 'strip-g strip-g-n'
-    }
-
-    var g = strip.append('g')
-        .attr("class",classer);
-
-    var rect = g.selectAll("rect")
-        .data(d)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) { return flipper * (mult * parseFloat(d.index)); })
-        .attr("y", "0")
-        .attr("width", "450")
-        .attr("height", "250")
-        .attr("class", "image-frame");
-
-    return true;
-}
-    
-function loadImages() {
-
-    var loadStrips = d3.selectAll(".strip-svg-" + perspective);
-    loadStrips.selectAll("rect")
-        .each( function(d) { 
-            var x = d3.select(this).attr("x")
-            if(x >= left && x <= right) { 
-
-                if(d.ld != true) {
-                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"] + "/full/,250/0/default.jpg";
-                    g.append("svg:image")
-                        .attr("x", x)
-                        .attr("y", "0")
-                        .attr("width", "450")
-                        .attr("height", "250")
-                        .attr("xlink:href", f)
-                        .attr("class","single-image");
-                    d.ld = true;
-                }
-             }; 
-        });
-}
-
-**/
 
 function scrollHandle(direction) {
 
