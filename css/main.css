@@ -181,6 +181,7 @@ body {
     font-weight: 700;
     font-size: 1.3em;
     cursor: pointer;
+    background-color: white;
 }
 
 .scroll-button:hover {
@@ -201,6 +202,7 @@ body {
     color: #2a2c2c;
     float: left;
     width: 70%;
+    background-color: white;
 }
 
 #controls-title {
