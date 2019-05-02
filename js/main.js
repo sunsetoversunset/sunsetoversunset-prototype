@@ -76,11 +76,14 @@ d3.csv('./data/addresses-s.csv').then(function(csv) {
 buildStrips().then(loadImages);
 
 
-rightButton = d3.select("#scroll-button-right")
+d3.select("#scroll-button-right")
     .on('click',function(){ scrollHandle("r"); });
 
-leftButton = d3.select("#scroll-button-left")
+d3.select("#scroll-button-left")
     .on('click',function(){ scrollHandle("l"); });
+
+d3.select("#jump-button")
+    .on('click',function(){ scrollHandle("j"); })
 
 d3.select('body')
     .on('keydown',function(){
@@ -215,7 +218,15 @@ function loadImages() {
 function scrollHandle(direction) {
 
     var dist;
+
+    if (direction == 'j') {
+        var jumpToAdd = Number(d3.select("#jump-value").property('value'));
+        dist = mult*(-(1/4670)*jumpToAdd+(920/467));
+
+    } else {
     ( direction == 'r' && perspective == 'n' ) || (direction == 'l' && perspective == 's') ? dist = scroll + (moveSpeed * width) : dist = scroll - (moveSpeed * width);
+    }
+
     scroll = dist;
 
     d3.selectAll('.strip-g-n')
