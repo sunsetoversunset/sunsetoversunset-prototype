@@ -124,10 +124,10 @@ body {
   z-index: 50;
 }
 
-#shim { height: 200px; width: 100%; }
+#shim { height: 155px; width: 100%; }
 
 
-#top-bar {
+#title-bar {
     width: 100%;
     font-family: rockwell, serif;
     font-style: normal;
@@ -179,7 +179,7 @@ body {
     margin-left: 20px;
     margin-right: 10px;
     font-weight: 700;
-    font-size: 1.3em;
+    font-size: 1.1em;
     cursor: pointer;
     background-color: white;
 }
@@ -207,13 +207,14 @@ body {
 
 #controls-title {
     font-weight: 700;
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin-bottom: 15px;
     float: left;
     margin-right: 25px;
 }
 
 .control-group {
+    font-size: 0.8em;
     float: left;
     margin-right: 25px;
 }
@@ -238,6 +239,18 @@ body {
     border-bottom: 2px solid #dddfdf;
     margin-bottom: 5px;
     padding-bottom: 5px;
+}
+
+#address-bar {
+    width: 100%;
+    height: 20px;
+    margin: 15px 0 0 0;
+    padding: 0;
+    background-color: white;
+}
+
+.addresses-text {
+    font-family: rockwell,serif;
 }
 
 .streetview-containers {

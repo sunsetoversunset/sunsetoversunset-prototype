@@ -34,18 +34,47 @@ var stripsContainersS = streetviewContainers.append('div')
 
 var stripsN = stripsContainersN.append('svg')
     .attr("width", width)
-    .attr("height", 250)
+    .attr("height", "250")
     .attr("class", "strip-svg strip-svg-n")
     .attr("id", function(d) { return "strip-svg-n-" + d.year; });
 
 var stripsS = stripsContainersS.append('svg')
     .attr("width", width)
-    .attr("height", 250)
+    .attr("height", "250")
     .attr("class", "strip-svg strip-svg-s")
     .attr("id", function(d) { return "strip-svg-s-" + d.year; });
 
+var addresses = d3.select('#address-bar').append('svg')
+    .attr("width", width)
+    .attr("height", "20");
+
+var addressesN = addresses.append('g')
+    .attr('class','addresses-text addresses-text-n');
+var addressesS = addresses.append('g')
+    .attr('class','addresses-text addresses-text-s hidden-strip');;
+
+d3.csv('../data/addresses-n.csv').then(function(csv) {
+    addressesN.selectAll('text')
+        .data(csv)
+        .enter()
+        .append('text')
+        .attr("x", function(d){ return d.index * mult; })
+        .attr("y", "15")
+        .text(function(d){ return d.address; });
+});
+
+d3.csv('../data/addresses-s.csv').then(function(csv) {
+    addressesS.selectAll('text')
+        .data(csv)
+        .enter()
+        .append('text')
+        .attr("x", function(d){ return -d.index * mult; })
+        .attr("y", "15")
+        .text(function(d){ return d.address; });
+});
 
 buildStrips().then(loadImages);
+
 
 rightButton = d3.select("#scroll-button-right")
     .on('click',function(){ scrollHandle("r"); });
@@ -73,6 +102,9 @@ d3.selectAll("#perspective-control>.control-option")
             d3.selectAll('.direction-text').text(function(){ return d3.select(this).text() == 'West' ? "East" : "West" });
             d3.selectAll('#perspective-control>.control-option').classed('control-option-selected',false);
             t.classed('control-option-selected',true);
+
+            d3.selectAll('.addresses-text').classed('hidden-strip',true);
+            d3.select('.addresses-text-' + p).classed('hidden-strip',false);
         }
 
      });
@@ -192,6 +224,12 @@ function scrollHandle(direction) {
 
     d3.selectAll('.strip-g-s')
         .transition()
+        .attr("transform","translate(" + dist + ",0)");
+
+    addressesN.transition()
+        .attr("transform","translate(" + -dist + ",0)");
+
+    addressesS.transition()
         .attr("transform","translate(" + dist + ",0)");
 
     loadImages();
