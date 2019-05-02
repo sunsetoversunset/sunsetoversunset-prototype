@@ -53,7 +53,7 @@ var addressesN = addresses.append('g')
 var addressesS = addresses.append('g')
     .attr('class','addresses-text addresses-text-s hidden-strip');;
 
-d3.csv('../data/addresses-n.csv').then(function(csv) {
+d3.csv('./data/addresses-n.csv').then(function(csv) {
     addressesN.selectAll('text')
         .data(csv)
         .enter()
@@ -63,7 +63,7 @@ d3.csv('../data/addresses-n.csv').then(function(csv) {
         .text(function(d){ return d.address; });
 });
 
-d3.csv('../data/addresses-s.csv').then(function(csv) {
+d3.csv('./data/addresses-s.csv').then(function(csv) {
     addressesS.selectAll('text')
         .data(csv)
         .enter()
