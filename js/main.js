@@ -81,7 +81,7 @@ d3.select("#scroll-button-left")
     .on('click', function() { scrollHandle("l"); });
 
 d3.select("#jump-value")
-    .on('keyup', function() { if(d3.event.keyCode == 13) {scrollHandle("j"); } });
+    .on('keyup', function() { if(d3.event.key == "Enter") {scrollHandle("j"); } });
 
 d3.select("#jump-button")
     .on('click', function() { scrollHandle("j"); });
