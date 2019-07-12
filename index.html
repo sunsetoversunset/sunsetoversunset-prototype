@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
+<body class="home-view">
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -72,8 +72,9 @@
     </div>
     </div>
   
-  <div id="shim"></div>
+  <div id="scrolling-guts">
   <div id="streetview-containers" class="clearfix"><!-- d3 does its work here --></div>
+  </div>
 
   </div><!-- #wraps-all -->
 
@@ -83,7 +84,8 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
 
   <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/globals.js"></script>
+  <script src="js/home-view.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. 
   <script>
