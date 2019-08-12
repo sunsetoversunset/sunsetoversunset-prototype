@@ -333,82 +333,87 @@ address,index
 9059,0.02723022997
 9101,0.0226803664
 9111,0.01966420132
-9119,0.01783461017
-9121,0.01658926989
-9131,0.01424486834
-9145,0.01176826766
-9151,0.009968687872
-9157,0.006767384493
-9165,0.004911872763
+9119,0.01930630658
+9121,0.01766441469
+9131,0.01609009037
+9145,0.01284324341
+9151,0.01104594611
+9157,0.008256756757
+9165,0.006263513514
 9201,0.002505421174
-Doheny Rd,0
-Cory Ave,0.008262709938
-N Doheny Dr,0.02424297322
-N Wetherly Dr,0.03537602006
-Hilldale Ave,0.0537961164
-N Clark St,0.06374902854
-Larrabee St,0.07413782025
-Horn Ave,0.0852242559
-Sherbourne Dr,0.1001926996
-Sunset Plaza Dr,0.1249778069
-Londonderry Pl,0.1395145817
-Miller Dr,0.1623903076
-Queens Rd,0.1785420508
-N Kings Rd,0.1983165344
-N Sweetzer Ave,0.2252269525
-Roxbury Rd,0.2444663114
-Marmont Ln,0.2531209663
-Selma Ave,0.2646997342
-Crescent Heights Boulevard,0.2742796745
-Laurel Canyon Blvd,0.2808996001
-N Laurel Ave,0.2866448031
-N Hayworth Ave,0.3000002459
-N Fairfax Ave,0.3132194896
-N Orange Grove Ave,0.323659873
-N Ogden Dr,0.3338987012
-N Genesee Ave,0.3444858313
-Courtney Ave,0.3544821981
-N Stanley Ave,0.3639623212
-N Curson Ave,0.3745756548
-N Sierra Bonita Ave,0.3848099354
-N Gardner St,0.395121071
-N Vista St,0.4121167642
-N Martel Ave,0.4213663996
-N Fuller Ave,0.4314074283
-N Poinsettia Pl,0.4419148566
-N Formosa Ave,0.4519963909
-N Detroit St,0.4634429531
-N La Brea Ave,0.4769303199
-N Orange Dr,0.502989863
-N Highland Ave,0.5281493457
-N McCadden Pl,0.5388217035
-N Las Palmas Ave,0.5504825337
-Cassil Pl,0.5738797737
-Schrader Blvd,0.5866419646
-Wilcox Ave,0.6000866825
-Cahuenga Blvd,0.6144534749
-Ivar Ave,0.6211079994
-Moriningside Ct,0.6310398826
-Vine St,0.6411048239
-Argyle Ave,0.655027391
-N El Centro Ave,0.66850224
-N Gower St,0.6819621686
-La Baig Ave,0.6987117164
-Gordon St,0.7065278189
-N Bronson Ave,0.7230069716
-N Van Ness Ave,0.7434675967
-N Wilton Pl,0.7640683145
-N Saint Andrews Pl,0.7839317178
-N Western Ave,0.805098602
-N Serrano Ave,0.8251793381
-Hobart Blvd,0.8386715562
-N Harvard Blvd,0.8507207809
-N Kingsley Dr,0.8610197601
-Winona Blvd,0.8714559889
-N Normandie Ave,0.8868725993
-N Marioposa Ave,0.8970121142
-N Alexandria Ave,0.9074919797
-N Kenmore Ave,0.9177667811
-N Edgemont St,0.9279013251
-N Vermont Ave,0.9688220332
-Rodney Dr,0.9894601378
+9169,0.005831081081
+9163,0.006959459459
+9161,0.007472972973
+9159,0.007824324324
+Doheny Road,0
+Cory Avenue,0.008159695003
+North Doheny Drive,0.02423660776
+Wetherly Drive,0.03557004832
+Hilldale Avenue,0.05395858687
+North Clark Street,0.0642198724
+Larrabee Street,0.07446183478
+Horn Avenue,0.08558928282
+Sherbourne Drive,0.09983938835
+Sunset Plaza Drive,0.1241061436
+Londonderry Place,0.1380386977
+Miller Drive,0.1594529475
+Queens Road,0.1757094958
+North Kings Road,0.1954808971
+North Sweetzer Avenue,0.2211990394
+Roxbury Road,0.2395187323
+Marmont Lane,0.2476675221
+Selma Avenue,0.2594121802
+Laurel Canyon Boulevard,0.2692915709
+North Laurel Avenue,0.2815277571
+North Hayworth Avenue,0.2950501358
+North Fairfax Avenue,0.3082001678
+North Orange Grove Avenue,0.3189289901
+North Ogden Drive,0.3292132558
+North Genesee Avenue,0.3398208212
+North Spaulding Avenue,0.3499038879
+North Stanley Avenue,0.3593815078
+North Curson Avenue,0.3699892891
+North Sierra Bonita Avenue,0.3803953599
+North Gardner Street,0.3906390674
+North Vista Street,0.4079412276
+North Martel Avenue,0.4172176645
+North Fuller Avenue,0.4273410236
+North Poinsettia Place,0.4377940462
+North Formosa Avenue,0.4480784494
+North Detroit Street,0.4595319429
+North La Brea Avenue,0.4732448931
+North Sycamore Avenue,0.488532351
+North Orange Drive,0.4993170851
+North Highland Avenue,0.5248195483
+North McCadden Place,0.5354259865
+North Las Palmas Avenue,0.5472235012
+Cassi Place,0.5707599963
+Schrader Boulevard,0.5835704999
+North Wilcox Avenue,0.5971556293
+North Cahuenga Boulevard,0.6116350192
+Ivar Avenue,0.6183084474
+Morningside Court,0.628378477
+Vine Street,0.6384483239
+Argyle Avenue,0.6526901641
+El Centro Avenue,0.666095945
+Gower Street,0.6797418814
+La Blaig Avenue,0.6965448332
+Gordon Street,0.7044105038
+Bronson Avenue,0.7209751265
+Van Ness Avenue,0.7416516324
+Hollywood Freeway,0.7540458072
+North Wilton Place,0.7622084136
+North Saint Andrew's Place,0.7824678446
+Western Avenue,0.8036208946
+Serrano Avenue,0.8238203808
+Hobart Boulevard,0.8375250169
+North Harvard Boulevard,0.8496211248
+North Kingsley Drive,0.8599292225
+Winona Boulevard,0.870535366
+Normandie Avenue,0.8860869937
+North Mariposa Avenue,0.8963354325
+North Alexadria Avenue,0.90682223
+Kenmore Avenue,0.9171309058
+Edgemont Street,0.9273794588
+Vermont Avenue,0.9687318943
+Rodney Drive,0.9894676439
