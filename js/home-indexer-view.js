@@ -76,6 +76,7 @@ d3.csv('./data/addresses-s.csv').then(function(csv) {
         .append('text')
         .attr("x", function(d) { return -d.index * mult; })
         .attr("y", "15")
+        .attr("text-anchor", "middle")
         .text(function(d) { return d.address; });
 });
 

@@ -51,6 +51,7 @@ d3.csv('./data/addresses-n.csv').then(function(csv) {
         .append('text')
         .attr("x", function(d) { return d.index * mult; })
         .attr("y", "15")
+        .attr("text-anchor", "middle")
         .text(function(d) { return d.address; });
 });
 
@@ -61,6 +62,7 @@ d3.csv('./data/addresses-s.csv').then(function(csv) {
         .append('text')
         .attr("x", function(d) { return -d.index * mult; })
         .attr("y", "15")
+        .attr("text-anchor", "middle")
         .text(function(d) { return d.address; });
 });
 
@@ -148,7 +150,7 @@ function createWireframes(csv, stripSvg, classer, flipper) {
         .data(csv)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return flipper * (mult * parseFloat(d.index)); })
+        .attr("x", function(d) { return (flipper * (mult * parseFloat(d.index))) - 184; })
         .attr("y", "0")
         .attr("width", "380")
         .attr("height", "250")
