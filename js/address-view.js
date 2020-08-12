@@ -22,6 +22,6 @@ function generateThumbnails(d) {
 		.enter()
 		.append('img')
 		.attr('class','streetview-thumbnail')
-		.attr('src',function(d){ return "http://media.getty.edu/iiif/research/archives/" + d.filename + "/full/,150/0/default.jpg"});
+		.attr('src',function(d){ return "https://media.getty.edu/iiif/image/" + d.identifier + "/full/,150/0/default.jpg"});
 
 }

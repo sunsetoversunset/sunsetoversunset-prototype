@@ -176,7 +176,8 @@ function loadImages() {
             if (m * x >= left && m * x <= right) {
                 if (d.ld != true) {
                     var g = d3.select(this.parentNode);
-                    var f = "http://media.getty.edu/iiif/research/archives/" + d["filename"];
+                    var f = "https://media.getty.edu/iiif/image/" + d.identifier;
+
                     g.append("svg:image")
                         .attr("x", x)
                         .attr("y", "0")
