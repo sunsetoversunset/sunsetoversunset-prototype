@@ -1,4 +1,4 @@
-const mult = 148000;
+const mult = 200;
 
 const reels = [
     { 'year': '1966', 'src': '2012m1_ref199_241' },

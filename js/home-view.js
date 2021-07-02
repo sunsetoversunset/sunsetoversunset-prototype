@@ -9,62 +9,137 @@ var streetviewContainers = d3.select('#streetview-containers').selectAll('div')
     .enter()
     .append('div')
     .attr('class', 'streetview-year-container')
-    .attr('id', function(d) { return 'streetview-year-container-' + d.year; });
+    .attr('id', function (d) { return 'streetview-year-container-' + d.year; });
 
 streetviewContainers.append('div')
     .attr('class', 'streetview-year-label')
-    .text(function(d) { return d.year; });
+    .text(function (d) { return d.year; });
 
 var stripsContainersN = streetviewContainers.append('div')
     .attr('class', 'photography-strip-container photography-strip-container-n')
-    .attr('id', function(d) { return 'photography-strip-container-n-' + d.year; });
+    .attr('id', function (d) { return 'photography-strip-container-n-' + d.year; });
 
 var stripsContainersS = streetviewContainers.append('div')
     .attr('class', 'photography-strip-container photography-strip-container-s hidden-strip')
-    .attr('id', function(d) { return 'photography-strip-container-s-' + d.year; });
+    .attr('id', function (d) { return 'photography-strip-container-s-' + d.year; });
 
 var stripsN = stripsContainersN.append('svg')
     .attr("width", width)
     .attr("height", "250")
     .attr("class", "strip-svg strip-svg-n")
-    .attr("id", function(d) { return "strip-svg-n-" + d.year; });
+    .attr("id", function (d) { return "strip-svg-n-" + d.year; });
 
 var stripsS = stripsContainersS.append('svg')
     .attr("width", width)
     .attr("height", "250")
     .attr("class", "strip-svg strip-svg-s")
-    .attr("id", function(d) { return "strip-svg-s-" + d.year; });
+    .attr("id", function (d) { return "strip-svg-s-" + d.year; });
 
-var addresses = d3.select('#address-bar').append('svg')
+var scrubBar = d3.select("#coordinate-scrub-bar")
+
+d3.select("#scrubber-bar")
+    .on('mousemove', function(){ 
+        let xPos = d3.event.clientX;
+        scrubBar.style('display', 'block');
+        scrubBar.style('left',`${xPos}px`);
+    })
+    .on('mouseleave', function(){
+        scrubBar.style('display', 'none');
+    })
+    .on('click', function() {
+        var mouseX = d3.mouse(this)[0];
+
+        if(perspective == 'n') {
+            var ix = (mouseX+scroll)/mult;
+        } else {
+            var ix = (scroll-mouseX)/mult;
+        }
+
+        window.alert(ix);
+    });
+
+
+var addresses = d3.select("#address-bar").append('svg')
     .attr("width", width)
-    .attr("height", "20");
+    .attr("height", "20")
+
 
 var addressesN = addresses.append('g')
     .attr('class', 'addresses-text addresses-text-n');
 var addressesS = addresses.append('g')
-    .attr('class', 'addresses-text addresses-text-s hidden-strip');;
+    .attr('class', 'addresses-text addresses-text-s hidden-strip');
 
-d3.csv('./data/addresses-n.csv').then(function(csv) {
-    addressesN.selectAll('text')
-        .data(csv)
+var addressesNData = []
+var addressesSData = []
+
+function loadAddressData(url) {
+
+return new Promise( function(resolve,reject) {
+
+   fetch(url,
+    {
+        "headers": {
+            "Authorization": "Token jk9y8Ms1CRYCIGD6pGdAFRkMZKiuIY9g"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        data.results.forEach(row=> {
+            let processedRow = {
+                "index": row.field_122137,
+                "address": row.field_122136
+            }
+
+            if(row.field_122138 === "n") {
+                addressesNData.push(processedRow)
+            }
+            else if(row.field_122138 === "s") {
+                console.log('pushing S')
+                addressesSData.push(processedRow)
+            }
+                
+        })
+        if(data.next) {
+            loadAddressData(data.next.replace("http","https")); // baserow returns next urls as http not https
+        }
+    })
+    .then(resolve);
+
+});
+
+}
+
+loadAddressData('https://api.baserow.io/api/database/rows/table/23215/?filter__field_122139__boolean=false')
+    .then(()=> {
+
+        console.log(addressesNData);
+        console.log(addressesSData);
+
+        addressesN.selectAll('text')
+        .data(addressesNData)
         .enter()
         .append('text')
         .attr("x", function(d) { return d.index * mult; })
         .attr("y", "15")
         .attr("text-anchor", "middle")
         .text(function(d) { return d.address; });
-});
 
-d3.csv('./data/addresses-s.csv').then(function(csv) {
-    addressesS.selectAll('text')
-        .data(csv)
+
+
+        addressesS.selectAll('text')
+        .data(addressesSData)
         .enter()
         .append('text')
         .attr("x", function(d) { return -d.index * mult; })
         .attr("y", "15")
         .attr("text-anchor", "middle")
         .text(function(d) { return d.address; });
-});
+    });
+
+
+
+
+
 
 buildStrips().then(loadImages);
 
@@ -218,7 +293,7 @@ function scrollHandle(direction) {
 
     if (direction == 'j') {
         var jumpToAdd = Number(d3.select("#jump-value").property('value'));
-        dist = mult * d3.scaleLinear([9200, 4530], [0, 1]).clamp(true)(jumpToAdd);
+        dist = mult * d3.scaleLinear([9200, 0], [0, 1000]).clamp(true)(jumpToAdd);
 
         var jumpToSide;
 
