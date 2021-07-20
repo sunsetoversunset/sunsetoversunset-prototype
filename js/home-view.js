@@ -4,6 +4,13 @@ var scroll = 0;
 var moveSpeed = 0.8;
 var perspective = 'n';
 
+var fullOpenFlag = false;
+document.addEventListener('keydown', function(e) { 
+    if(e.key === 'f') { fullOpenFlag = true; }
+});
+
+document.addEventListener('keyup', function(){ fullOpenFlag = false; });
+
 var streetviewContainers = d3.select('#streetview-containers').selectAll('div')
     .data(reels)
     .enter()
@@ -260,7 +267,11 @@ function loadImages() {
                         .attr("height", "250")
                         .attr("xlink:href", f + "/full/,250/0/default.jpg")
                         .attr("class", "single-image")
-                        .on("click", function(d) { window.open(f + "/full/,900/0/default.jpg") });
+                        .on("click", function(d) { 
+                            
+                            if(fullOpenFlag) { window.open(f + "/full/full/0/default.jpg") }
+                            else { window.open(f + "/full/,900/0/default.jpg") }
+                             });
                     d.ld = true;
                 }
             };
