@@ -107,10 +107,12 @@ return new Promise( function(resolve,reject) {
                 
         })
         if(data.next) {
-            loadAddressData(data.next.replace("http","https")); // baserow returns next urls as http not https
+            loadAddressData(data.next.replace("http","https")).then(resolve); // baserow returns next urls as http not https
+        } else {
+            resolve();
         }
     })
-    .then(resolve);
+    ;
 
 });
 
